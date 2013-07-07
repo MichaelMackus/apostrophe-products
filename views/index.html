@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% include "productMacros.html" %}
+
+{% block bodyClass %}{{ super() }} products-page{% endblock %}
+
+{# Output the current content of the page, with buttons to edit it #}
+
+{% block mainContent %}
+
+  <h1>Products</h1>
+
+  <div class="column">
+
+    {% if page.children.length %}
+      <div class="column-element">
+
+        {% block subnav %}
+          <div class="subnavigation">
+            <h4>Subnav</h4>
+            <p>Just a simple subnav</p>
+          </div>
+        {% endblock %}
+
+      </div>
+    {% endif %}
+
+    <div class="column-element apos-area-sidebar">
+      {{ aposArea({ slug: slug + ":sidebar", area: page.areas.sidebar, edit: edit }) }}
+    </div>
+
+  </div>
+
+  <div class="column-2">
+    <div class="apos-products-list">
+      {{ renderProductPreviews(items, page.url) }}
+    </div>
+  </div>
+
+  <div class="full-width-column">
+    {{ renderPager(pager, page.url) }}
+  </div>
+
+  {# Just uncomment this script block to enable infinite scroll instead! #}
+
+  {#
+  <script type="text/javascript">
+    $(function() {
+      $('.apos-refreshable .apos-blog-posts').bottomless({
+        source: {{ page.url | json }}
+      });
+      // We don't need the pager if we can infinite scroll
+      // However we hide it with JavaScript so that
+      // Google still finds it otherwise we have serious SEO issues!
+      $('.apos-refreshable .apos-pager').hide();
+    });
+  </script>
+  #}
+
+{% endblock %}

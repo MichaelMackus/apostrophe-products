@@ -1,0 +1,23 @@
+{% include 'pagerMacros.html' %}
+
+{% macro renderProductPreviews(items, pageUrl) %}
+  {% if items %}
+    {% for item in items %}
+      {{ renderProductPreview(item, pageUrl) }}
+    {% endfor %}
+  {% else %}
+    <h4>There are no products yet.</h4>
+  {% endif %}
+{% endmacro %}
+
+{% macro renderProductPreview(item, pageUrl) %}
+  <div class="product-row">
+    <div class="column">
+      <a href="{{ pageUrl }}/{{ item.slug }}">{{ aposArea({ area: item.areas.photos, slideshow: { size: 'one-sixth', limit: 1, arrows: false } }) }}</a>
+    </div>
+    <div class="column">
+      <h3><a href="{{ pageUrl }}/{{ item.slug }}">{{ item.title }}</a></h3>
+      <p><strong>Price: {{ item.price }}</strong></p>
+    </div>
+  </div>
+{% endmacro %}

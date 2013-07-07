@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% include "productMacros.html" %}
+
+{% block bodyClass %}{{ super() }} product-details-page{% endblock %}
+
+{% block extraBreadcrumbs %}
+  <li><a href="{{ page.url }}">{{ page.title | e }}</a></li>
+  <li>&nbsp;/&nbsp;{{ item.title | e }}</li>
+{% endblock %}
+
+{% block mainContent %}
+
+  <div class="column apos-area-sidebar">
+    {{ aposArea({ slug: slug + ":sidebar", area: page.areas.sidebar, edit: edit }) }}
+  </div>
+
+  <div class="column-2 product-details">
+    <h3>{{ item.title }}</h3>
+
+    {{ aposArea({ area: item.areas.photos }) }}
+
+    <p><strong>Price: {{ item.price }}</strong></p>
+
+    <div class="product-body">{{ aposArea({ area: item.areas.body }) }}</div>
+  </div>
+
+{% endblock %}

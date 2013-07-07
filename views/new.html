@@ -1,0 +1,21 @@
+{% include 'snippetMacros.html' %}
+<div class="apos-modal apos-template {% block class %}apos-new-product{% endblock %}">
+  <h3>{% block label %}New Product{% endblock %}</h3>
+  {% block topButtons %}
+  {% endblock %}
+  <div class="apos-modal-body">
+    <form>
+      {{ snippetText('title', 'Title') }}
+      {# Slugs become editable later, allow the edit template to add them here #}
+      {% block slug %}{% endblock %}
+
+      {{ snippetText('price', 'Price') }}
+
+      {{ snippetSingleton('photos', 'Photos') }}
+      {{ snippetArea('body', 'Body') }}
+    </form>
+  </div>
+  {% block buttons %}
+  {{ snippetNewButtons() }}
+  {% endblock %}
+</div>
